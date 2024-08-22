@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
+
 Base = declarative_base()
 
 
@@ -36,7 +37,7 @@ class XhsCreatorTagging(Base):
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
     add_ts = Column(DateTime, server_default=func.now(), comment='记录添加时间')
-    last_modify_ts = Column(DateTime, server_onupdate=func.now(), nullable=False, onupdate=DateTime.utcnow, comment='记录最后修改时间')
+    last_modify_ts = Column(DateTime, server_onupdate=func.now(), nullable=False, onupdate=func.now(), comment='记录最后修改时间')
 
 
 class XhsCreatorTaggingChai(Base):
@@ -50,8 +51,8 @@ class XhsCreatorTaggingChai(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, default=DateTime.utcnow, comment='记录添加时间')
-    last_modify_ts = Column(DateTime, default=DateTime.utcnow, onupdate=DateTime.utcnow, comment='记录最后修改时间')
+    add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
+    last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
 
 
 class XhsCreatorTaggingGpt(Base):
@@ -109,8 +110,8 @@ class XhsImageTagging(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, default=DateTime.utcnow, comment='记录添加时间')
-    last_modify_ts = Column(DateTime, default=DateTime.utcnow, onupdate=DateTime.utcnow, comment='记录最后修改时间')
+    add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
+    last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
 
 
 class XhsImageTaggingChai(Base):
@@ -126,8 +127,8 @@ class XhsImageTaggingChai(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, default=DateTime.utcnow, comment='记录添加时间')
-    last_modify_ts = Column(DateTime, default=DateTime.utcnow, onupdate=DateTime.utcnow, comment='记录最后修改时间')
+    add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
+    last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
 
 
 class XhsImageTaggingGpt(Base):
@@ -143,8 +144,8 @@ class XhsImageTaggingGpt(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, default=DateTime.utcnow, comment='记录添加时间')
-    last_modify_ts = Column(DateTime, default=DateTime.utcnow, onupdate=DateTime.utcnow, comment='记录最后修改时间')
+    add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
+    last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
 
 
 class XhsNote(Base):
@@ -160,16 +161,16 @@ class XhsNote(Base):
     note_id = Column(String(64), nullable=False, comment='笔记ID')
     type = Column(String(16), comment='笔记类型(normal | video)')
     title = Column(String(255), comment='笔记标题')
-    desc = Column(LongText, comment='笔记描述')
-    video_url = Column(LongText, comment='视频地址')
+    desc = Column(Text, comment='笔记描述')
+    video_url = Column(Text, comment='视频地址')
     time = Column(BigInteger, nullable=False, comment='笔记发布时间戳')
     last_update_time = Column(BigInteger, nullable=False, comment='笔记最后更新时间戳')
     liked_count = Column(String(16), comment='笔记点赞数')
     collected_count = Column(String(16), comment='笔记收藏数')
     comment_count = Column(String(16), comment='笔记评论数')
     share_count = Column(String(16), comment='笔记分享数')
-    image_list = Column(LongText, comment='笔记封面图片列表')
-    tag_list = Column(LongText, comment='标签列表')
+    image_list = Column(Text, comment='笔记封面图片列表')
+    tag_list = Column(Text, comment='标签列表')
     note_url = Column(String(255), comment='笔记详情页的URL')
 
 
@@ -186,7 +187,7 @@ class XhsNoteComment(Base):
     comment_id = Column(String(64), nullable=False, comment='评论ID')
     create_time = Column(BigInteger, nullable=False, comment='评论时间戳')
     note_id = Column(String(64), nullable=False, comment='笔记ID')
-    content = Column(LongText, nullable=False, comment='评论内容')
+    content = Column(Text, nullable=False, comment='评论内容')
     sub_comment_count = Column(Integer, nullable=False, comment='子评论数量')
     pictures = Column(String(512), comment='图片列表')
     parent_comment_id = Column(String(64), comment='父评论ID')
