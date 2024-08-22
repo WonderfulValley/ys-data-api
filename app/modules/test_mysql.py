@@ -1,7 +1,7 @@
-from app.model.model import UserImageOperation
+from app.model.tagging import UserImageOperation
 from app.utils.mysql_utils import mysqlSession, engine, Base
-from app.model.model import Image
-from app.model.model import User
+from app.model.tagging import Image
+from app.model.tagging import User
 
 # def get_images():
 #     with SessionLocal() as db:  # 使用 with 语句确保会话在使用后关闭

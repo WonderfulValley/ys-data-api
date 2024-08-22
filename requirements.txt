@@ -18,4 +18,3 @@ oss2~=2.18.5
 PyJWT==2.8.0
 SQLAlchemy==2.0.31
 pymysql==1.1.1
-pillow~=10.3.0
