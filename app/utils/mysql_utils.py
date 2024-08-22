@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from app.model.model import Base  # 假设 Base 是你的模型基类  
 
 # 数据库连接设置  
-DATABASE_URL = 'mysql+pymysql://image_service:k$cF8_0Kcb@rm-uf6528279hy6f7so3zo.mysql.rds.aliyuncs.com:3306/fwings?charset=utf8mb4'
+DATABASE_URL = 'mysql+pymysql://data:data-123@rm-2ze5v97e9zibil4362o.mysql.rds.aliyuncs.com:3306/data?charset=utf8mb4'
 
 # 创建 SQLAlchemy 引擎  
 engine = create_engine(DATABASE_URL, echo=False, pool_pre_ping=True)
