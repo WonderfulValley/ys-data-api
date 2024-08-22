@@ -1,0 +1,16 @@
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+
+.DS_Store
+
+
+.env
+config_local.ini
+*.log    # 忽略所有以.log结尾的文件
+temp*    # 忽略所有以temp开头的文件或目录
+output
