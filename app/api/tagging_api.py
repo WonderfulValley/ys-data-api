@@ -63,7 +63,7 @@ def getCreatorList():
         print(
             f"ID: {creator.id}, User ID: {creator.user_id}, Nickname: {creator.nickname}, note_count: {note_count}, image_count:{image_count}, tagged_image_count:{tagged_image_count}")
 
-def getCreatorList():
+def getNodeList():
     session = mysqlSession()
     user_id = "53f9ce73b4c4d6062982ff8a"
     # 作者所有的文章
@@ -79,3 +79,19 @@ def getCreatorList():
     for note, image_count, tagged_image_count in notes:
         print(
             f"ID: {note.id},note_id: {note.note_id},image_count: {image_count},tagged_image_count: {tagged_image_count}")
+
+def getImageList():
+    session = mysqlSession()
+    user_id = "56577a2282718c0a974d261d"
+    note_id = "5a4cf388fb2a365983d9ee02"
+    images_with_tags_query = session.query(XhsImage, XhsImageTagging).join(
+        XhsImageTagging,
+        XhsImage.file_url == XhsImageTagging.file_path
+    ).filter(
+        XhsImage.note_id == note_id,
+        XhsImageTagging.note_id == note_id
+    ).all()
+
+    for img, tagging in images_with_tags_query:
+        print(f"Image ID: {img.id}, File Path: {img.file_url}")
+        print(f"  XhsImageTagging ID: {tagging.id}")
