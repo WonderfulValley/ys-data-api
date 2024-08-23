@@ -1,7 +1,7 @@
 import argparse
 
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
 import base64
 from functools import wraps
@@ -30,9 +30,9 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 
-import app.api.tagging
+import app.api.tagging_api
 
-tagging_api = app.api.tagging
+tagging_api = app.api.tagging_api
 
 
 @fastapi.post('/removeBg')
@@ -65,14 +65,12 @@ def newSts():
 
 def loadModule(currentModuleName):
     if currentModuleName == "styleConvert":
-        import app.api.tagging
-        tagging_api = app.api.tagging
+        import app.api.tagging_api
+        tagging_api = app.api.tagging_api
 
-        @fastapi.get('/newBackground')
-        def newBackground(input_data: dict, request: Request):
-            image_path = "1.png"
-            base64_image = encode_image(image_path)
-            res = tagging_api.newBackground(base64_image)
+        @fastapi.get('/creatorList')
+        def creatorList(some_query_param: str = Query(None, title="Some Query Parameter", description="An optional query parameter")):
+            res = tagging_api.getCreatorList()
             return res
 
 
