@@ -63,39 +63,19 @@ def getCreatorList():
         print(
             f"ID: {creator.id}, User ID: {creator.user_id}, Nickname: {creator.nickname}, note_count: {note_count}, image_count:{image_count}, tagged_image_count:{tagged_image_count}")
 
-
-def recordUserAction(ossFilePath, naturalWidth, naturalHeight, operation_type, user_id):
-    # 获取hash
-    parts = ossFilePath.split('/')
-    filename = parts[-1]
-    image_hash, extension = os.path.splitext(filename)
-    # 处理图片
-    image_id = 0
-    with mysqlSession() as session:
-        new_image = Image(
-            oss_path=ossFilePath,
-            width=naturalWidth,
-            height=naturalHeight,
-            uuid=uuid.uuid4(),
-            parent_id=0,
-            image_source='user',
-            state='USER',
-            image_hash=image_hash,
-            creator_source='wx',
-            creator=user_id,
-            image_object='USER'
-        )
-        session.add(new_image)
-        session.commit()
-        image_id = new_image.id
-
-    # 最终记录
-    with mysqlSession() as session:
-        new_operation = UserImageOperation(
-            user_id=user_id,
-            image_id=image_id,
-            operation_type=operation_type
-        )
-        session.add(new_operation)
-        session.commit()
-    return "ok"
+def getCreatorList():
+    session = mysqlSession()
+    user_id = "53f9ce73b4c4d6062982ff8a"
+    # 作者所有的文章
+    notes = session.query(XhsNote,
+                          session.query(func.count(XhsImage.id)).
+                          filter(XhsImage.note_id == XhsNote.note_id).
+                          scalar_subquery().label('image_count'),
+                          session.query(func.count(XhsImageTagging.user_id)).
+                          filter(XhsImageTagging.note_id == XhsNote.note_id).
+                          scalar_subquery().label('tagged_image_count'), ).filter(XhsNote.user_id == user_id).all()
+    # creator = session.query(XhsCreator).filter(XhsCreator.user_id == user_id).all()
+    # creator_tag = session.query(XhsCreatorTagging).filter(XhsCreatorTagging.user_id == user_id).all()
+    for note, image_count, tagged_image_count in notes:
+        print(
+            f"ID: {note.id},note_id: {note.note_id},image_count: {image_count},tagged_image_count: {tagged_image_count}")
