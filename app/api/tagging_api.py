@@ -95,3 +95,5 @@ def getImageList():
     for img, tagging in images_with_tags_query:
         print(f"Image ID: {img.id}, File Path: {img.file_url}")
         print(f"  XhsImageTagging ID: {tagging.id}")
+
+def getCrawlerTrend():

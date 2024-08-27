@@ -36,9 +36,10 @@ class XhsCreatorTagging(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, server_default=func.now(), comment='记录添加时间')
-    last_modify_ts = Column(DateTime, server_onupdate=func.now(), nullable=False, onupdate=func.now(), comment='记录最后修改时间')
-
+    add_ts = Column(BigInteger, nullable=False, comment='记录添加时间戳')
+    last_modify_ts = Column(BigInteger, nullable=False, comment='记录最后修改时间戳')
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsCreatorTaggingChai(Base):
     __tablename__ = 'xhs_creator_tagging_chai'
@@ -51,9 +52,10 @@ class XhsCreatorTaggingChai(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
-    last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
-
+    add_ts = Column(BigInteger, nullable=False, comment='记录添加时间戳')
+    last_modify_ts = Column(BigInteger, nullable=False, comment='记录最后修改时间戳')
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsCreatorTaggingGpt(Base):
     __tablename__ = 'xhs_creator_tagging_gpt'
@@ -66,9 +68,10 @@ class XhsCreatorTaggingGpt(Base):
     shape = Column(String(255), comment='体型')
     style = Column(String(500), comment='风格，逗号分隔')
     scene = Column(String(500), comment='场景，逗号分隔')
-    add_ts = Column(DateTime, server_default='CURRENT_TIMESTAMP', comment='记录添加时间')
-    last_modify_ts = Column(DateTime, server_default='CURRENT_TIMESTAMP', onupdate='CURRENT_TIMESTAMP',
-                            comment='记录最后修改时间')
+    add_ts = Column(BigInteger, nullable=False, comment='记录添加时间戳')
+    last_modify_ts = Column(BigInteger, nullable=False, comment='记录最后修改时间戳')
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsImage(Base):
     __tablename__ = 'xhs_image'
@@ -114,7 +117,8 @@ class XhsImageTagging(Base):
     scene = Column(String(500), comment='场景，逗号分隔')
     add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
     last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
-
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsImageTaggingChai(Base):
     __tablename__ = 'xhs_image_tagging_chai'
@@ -133,7 +137,8 @@ class XhsImageTaggingChai(Base):
     scene = Column(String(500), comment='场景，逗号分隔')
     add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
     last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
-
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsImageTaggingGpt(Base):
     __tablename__ = 'xhs_image_tagging_gpt'
@@ -152,7 +157,8 @@ class XhsImageTaggingGpt(Base):
     scene = Column(String(500), comment='场景，逗号分隔')
     add_ts = Column(DateTime, default=func.now(), comment='记录添加时间')
     last_modify_ts = Column(DateTime, default=func.now(), onupdate=func.now(), comment='记录最后修改时间')
-
+    hair_color = Column(String(255), comment='发色')
+    skin_color = Column(String(255), comment='肤色')
 
 class XhsNote(Base):
     __tablename__ = 'xhs_note'
